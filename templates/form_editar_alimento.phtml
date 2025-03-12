@@ -1,0 +1,58 @@
+<br>
+<h2>Editar un alimento:</h2>
+
+<h3> Ingrese los nuevos datos: </h3>
+
+<form action="actualizar_alimento" method="POST" class="my-4">
+    <!-- ID con campo oculto para pasarlo. -->
+    <input type="hidden" name="ID_alimentos" value="<?=htmlspecialchars($alimento->ID_alimentos) ?>">  
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="E_nombre_alimento"> Nuevo nombre del alimento </label>
+                    <input required name="E_nombre_alimento" type="text" class="form-control" placeholder="<?=htmlspecialchars($alimento->nombre_alimento)?>" required>
+                    
+                    <label for="E_descripcion_alimento"> Nueva Descripción </label>
+                    <input required name="E_descripcion_alimento" type="text" class="form-control" placeholder="<?= htmlspecialchars($alimento->descripcion_alimento) ?>">
+
+                    <div class="col-md-6">    
+                        <div class="form-group">
+                            <label for="E_grupo">Grupo</label>
+                                <select name="ID_grupos" class="form-control" required >
+                                    <?php foreach ($grupos as $grupo): ?>
+                                        <option value="<?= $grupo->ID_grupos?>" <?= ($grupo->ID_grupos == $alimento->ID_grupos) ? 'selected' : '' ?>>
+                                        <?= htmlspecialchars($grupo->nombre_grupo) ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                        </div>
+                </div>
+
+                    <label for="E_calorias"> Calorías (cada 100gr.) </label>
+                    <input required name="E_calorias" type="text" class="form-control" placeholder="<?= $alimento->calorias ?>">
+
+                    <label for="E_proteinas"> Proteínas (cada 100gr.) </label>
+                    <input required name="E_proteinas" type="text" class="form-control" placeholder="<?= $alimento->proteinas ?>">
+
+                    <label for="E_carbohidratos"> Carbohidratos (cada 100gr.) </label>
+                    <input required name="E_carbohidratos" type="text" class="form-control" placeholder="<?= $alimento->carbohidratos ?>">
+
+                    <label for="E_grasas"> Grasas (cada 100gr.) </label>
+                    <input required name="E_grasas" type="text" class="form-control" placeholder="<?= $alimento->grasas ?>">
+
+                    <label for="E_fibra"> Fibras (cada 100gr.) </label>
+                    <input required name="E_fibra" type="text" class="form-control" placeholder="<?= $alimento->fibra ?>">
+
+                    <label for="E_imagen_alimento"> Foto del alimento (URL). </label>
+                    <input required name="E_imagen_alimento" type="url" class="form-control"  placeholder="<?= htmlspecialchars($alimento->imagen_alimento) ?>">
+                </div>
+            </div>    
+        <div class="col-9">
+            <br>
+            <button type="submit" class="btn btn-outline-secondary"> Editar </button>                
+     </div>                                
+</form>
+
+
+
+<?php require 'templates/layout/footer.phtml'; ?>

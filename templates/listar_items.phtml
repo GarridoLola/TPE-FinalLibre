@@ -1,0 +1,10 @@
+<h1> Alimentos del grupo <?= htmlspecialchars($nombre_grupo)?> </h1>
+<ul class="list-group">
+    <?php foreach($alimentos as $alimento) { ?>
+        <li class="list-group-item">
+            <b> <?= $alimento->nombre_alimento ?> </b>
+        </li>
+    <?php } ?>
+</ul>
+
+<?php require 'templates/layout/footer.phtml'; ?>

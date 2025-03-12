@@ -1,0 +1,23 @@
+<br>
+<h2>Agrega un grupo alimenticio:</h2>
+
+<form action="agregar_grupo" method="POST" class="my-4">
+    <div class="row">
+        <div class="col-9">
+            <div class="form-group">
+                <label> Ingrese un nuevo grupo </label>
+                <input required name="nombre_grupo" type="text" class="form-control">
+
+                <label> Escriba una breve descripción: </label>
+                <input required name="descripcion_grupo" type="text" class="form-control">
+
+                <label> Suba una foto del grupo alimenticio (URL). </label>
+                <input name="imagen_grupo" type="url" class="form-control">
+            </div>
+        </div>
+        <div class="col-9">
+            <br>
+            <button type="submit" class="btn btn-outline-success"> Agregar </button>
+        </div>
+    </div>
+</form>

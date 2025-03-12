@@ -1,0 +1,33 @@
+<h1> Lista de Grupos Alimenticios </h1>
+
+
+<ul class="list-group">
+    <?php foreach ($grupos as $grupo) { ?>
+        <li class="list-group-item">
+                <div class="label">
+                    <b> <?= htmlspecialchars($grupo->nombre_grupo) ?> </b> | 
+                    <a href="mostrar_items/<?= $grupo->ID_grupos ?>" > Ver alimentos </a> 
+                </div>
+
+                <br>
+                <p> <?= htmlspecialchars($grupo->descripcion_grupo) ?> </p>
+
+                <?php if (!empty($grupo->imagen_grupo)): ?>
+                    <img src="<?= htmlspecialchars($grupo->imagen_grupo) ?>" class="img-thumbnail" style="max-width: 150px;" >
+                <?php endif; ?>
+
+                <!-- ADMIN -->
+
+                <?php if ($usuario): ?>
+                    <div class="actions">
+                        <!-- editar grupo -->
+                        <a href="form_editar_grupo/<?= $grupo->ID_grupos ?>" type="button" class="btn btn-outline-secondary btn-sm"> Editar </a>
+                        <!-- eliminar grupo -->
+                        <a href="eliminar_grupo/<?= $grupo->ID_grupos ?>" type="button" class="btn btn-outline-danger btn-sm"> Eliminar </a>
+                    </div>
+                <?php endif; ?>
+            </li>
+         <?php } ?>
+</ul>
+
+<?php require_once 'templates/layout/footer.phtml'; ?>

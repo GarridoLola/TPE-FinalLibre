@@ -1,0 +1,49 @@
+<br>
+<h2>Agrega un alimento:</h2>
+
+<form action="agregar_alimento" method="POST" class="my-4">
+    <div class="row">
+        <div class="col-9">
+            <div class="form-group">
+                <label for="nombre_alimento"> Nombre del alimento </label>
+                <input required name="nombre_alimento" type="text" class="form-control">
+
+                <label for="descripcion_alimento"> Descripción </label>
+                <input required name="descripcion_alimento" type="text" class="form-control">
+
+                <label for="calorias"> Calorías (cada 100gr.) </label>
+                <input required name="calorias" type="text" class="form-control">
+
+                <label for="proteinas"> Proteínas (cada 100gr.) </label>
+                <input required name="proteinas" type="text" class="form-control">
+
+                <label for="carbohidratos"> Carbohidratos (cada 100gr.) </label>
+                <input required name="carbohidratos" type="text" class="form-control">
+
+                <label for="grasas"> Grasas (cada 100gr.) </label>
+                <input required name="grasas" type="text" class="form-control">
+
+                <label for="fibra"> Fibras (cada 100gr.) </label>
+                <input required name="fibra" type="text" class="form-control">
+
+                <label for="imagen_alimento"> Subir una foto del alimento (URL). </label>
+                <input required name="imagen_alimento" type="url" class="form-control">
+            </div>
+        </div>
+
+        <div class="col-3">
+            <div class="form-group">
+                <label>Seleccione un grupo alimenticio: </label>
+                <select required name="grupo" class="form-control">
+                    <option value=""></option>
+                    <?php foreach($grupos as $grupo): ?>
+                        <option value="<?= htmlspecialchars($grupo->ID_grupos)?>"><?= htmlspecialchars($grupo->nombre_grupo)?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-outline-success"> Agregar </button>
+
+</form>

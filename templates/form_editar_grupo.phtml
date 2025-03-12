@@ -1,0 +1,27 @@
+<br>
+<h2>Editar un grupo alimenticio:</h2>
+
+<form action="actualizar_grupo" method="POST" class="my-4">
+    <!-- ID con campo oculto para pasarlo. -->
+    <input type="hidden" name="ID_grupos" value="<?=htmlspecialchars($grupo->ID_grupos) ?>"> 
+    <div class="row">
+        <div class="col-9">
+            <div class="form-group">
+                <label> Cambie el nombre: </label>
+                <input required name="E_nombre_grupo" type="text" class="form-control" placeholder="<?=htmlspecialchars($grupo->nombre_grupo)?>" required>
+
+                <label> Escriba una breve descripción: </label>
+                <input required name="E_descripcion_grupo" type="text" class="form-control" placeholder="<?=htmlspecialchars($grupo->descripcion_grupo)?>" required>
+
+                <label> Suba una foto del grupo alimenticio (URL). </label>
+                <input name="E_imagen_grupo" type="url" class="form-control">
+            </div>
+        </div>
+        <div class="col-9">
+            <br>
+            <button type="submit" class="btn btn-outline-secondary"> Editar </button>
+        </div>
+    </div>
+</form>
+
+<?php require 'templates/layout/footer.phtml'; ?>
