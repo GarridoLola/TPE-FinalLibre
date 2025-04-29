@@ -16,9 +16,9 @@
     //GET, api/alimentos
 
     public function obtenerTodos($req, $res){
-        $orderBy = null;
-        if (isset($req->query->orderBy)) {
-                $orderBy = $req->query->orderBy;
+        $orderBy = false;
+        if (isset($req->query->orderBy)){
+            $orderBy = $req->query->orderBy;
         }
 
         $orderDirection = 'ASC';
@@ -26,6 +26,7 @@
             $orderDirection = $req->query->orderDirection;
         }
 
+        
         $filtro = null;
         if (isset($req->query->filtro)){
             $filtro = $req->query->filtro;
@@ -35,12 +36,11 @@
         if (isset($req->query->valor)){
             $valor = $req->query->valor;
             if ($valor < 0){
-                return $this->vista->response("El número debe ser mayor o igual a 0", 400);
+                return $this->vista->response("El número debe ser positivo", 400);
             }
         }
 
         //paginacion
-
         $pagina = 1;
         if (isset($req->query->pagina)){
             $pagina = $req->query->pagina;
@@ -57,7 +57,7 @@
             }
         }
 
-        $alimentos = $this->modelo->obtenerTodosAlimentos($orderBy, $orderDirection, $filtro, $valor, $pagina, $limite);
+        $alimentos = $this->modelo->obtenerTodosAlimentos($orderBy, $orderDirection, $valor, $filtro, $pagina, $limite);
         
         if (!$alimentos){
             return $this->vista->response("No se encontraron alimentos con ese filtro", 404);

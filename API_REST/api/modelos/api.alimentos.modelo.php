@@ -21,21 +21,40 @@ class alimentosModelo{
         }
     }
 
-    public function obtenerTodosAlimentos($orderBy = false, $orderDirection, $filtro, $valor, $pagina, $limite){
+    public function obtenerTodosAlimentos($orderBy = false, $orderDirection, $valor, $filtro, $pagina, $limite){
         $sql = 'SELECT * FROM alimentos';
-        $params = [];
-
-        if ($filtro !== null && isset($valor)){
-            $sql .= " WHERE $filtro = ?";
-            $params[] = $valor;
+      
+        //filtrar por campo y por valor
+        if ($filtro !==null && $valor!==null) {
+            switch ($filtro){
+                case 'proteinas':
+                    $sql .= ' WHERE proteinas = ? ';
+                break;
+                case 'calorias': 
+                    $sql .= ' WHERE calorias = ?';
+                break;
+                case 'carbohidratos':
+                    $sql .= ' WHERE carbohidratos = ?';
+                break;
+                case 'fibra': 
+                    $sql .= ' WHERE fibra = ?';
+                break;
+                case 'grasas': 
+                    $sql .= ' WHERE grasas = ?';
+                break;
+            }
         }
 
-        if (strtoupper($orderDirection) === 'DESC'){
+          
+        //ordenar ASC o DESC
+        if (strtoupper($orderDirection) === 'DESC'){ //texto en mayus.
             $orderDirection = 'DESC';
         } else {
             $orderDirection = 'ASC'; //defecto
         }
 
+
+        //ordenar por campo
         if ($orderBy){
             switch ($orderBy){
                 case 'calorias':
@@ -51,17 +70,21 @@ class alimentosModelo{
         }
 
         //paginación
-
         if ($pagina !==null && $limite !== null){
-            $desplazar = ($pagina - 1) * $limite;
+            $desplazar = ($pagina - 1) * $limite; //
             $sql .= ' LIMIT ' .(int)$limite . ' OFFSET ' . (int)$desplazar; //asegura num enteros.
         }
 
-        //ejecuto la consulta
+        //preparo y ejecuto la consulta
         $query = $this->db->prepare($sql);
-        $query->execute($params);
 
-        //obtengo los datos en un arreglo de objetos.
+
+        if ($filtro !==null && $valor!==null) {
+            $query->execute([$valor]); //si hay valor, lo envía
+        } else {
+            $query->execute(); //ejecuta la consulta normal
+        }
+
         $alimentos = $query->fetchAll(PDO::FETCH_OBJ);
         return $alimentos;
     }

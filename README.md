@@ -30,16 +30,15 @@ Desde el sitio web, podrás gestionar los datos de los grupos de alimentos y los
 
 ### Documentación de los Endpoints:
 * Para obtener una lista de todos los alimentos existentes, utilizamos el verbo 'GET'. 
-GET https://localhost/nutriAPP/API_REST/api/alimentos
+GET /nutriAPP/API_REST/api/alimentos
 
 * Para obtener un alimento en específico, utilizamos 'GET' junto con su ID. 
-GET https://localhost/nutriAPP/API_REST/api/alimentos/{id}
+GET /nutriAPP/API_REST/api/alimentos/{id}
 
-* Para eliminar un alimento, utilizamos 'DELETE', agregándole el ID de dicho alimento. Ejemplo: DELETE https://localhost/nutriAPP/API_REST/api/alimentos/{id}
-
+* Para eliminar un alimento, utilizamos 'DELETE', agregándole el ID de dicho alimento. Ejemplo: DELETE /nutriAPP/API_REST/api/alimentos/{id}
 
 * Para agregar un alimento, utilizamos  'POST'. La información debe enviarse en formato JSON a través del body de la solicitud. 
-POST https://localhost/nutriAPP/API_REST/api/alimentos
+POST /nutriAPP/API_REST/api/alimentos
 
 Ejemplo a insertar:
 
@@ -56,9 +55,11 @@ Ejemplo a insertar:
     "imagen_alimento": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRA7zTyW2YGgBcOP96ibWgtPBi3-44FGhcweQ&s"
 }
 
+*Nota: para realizar este item el usuario debe estar autenticado.*
+
 * Para editar un alimento existente, utilizamos 'PUT'. 
 La información debe ser enviada en formato JSON a través del body de la solicitud y debemos indicar el ID del alimento a modificar.
-PUT https://localhost/nutriAPP/API_REST/api/alimentos/{id}
+PUT /nutriAPP/API_REST/api/alimentos/{id}
 
 Ejemplo a insertar:
 
@@ -75,23 +76,25 @@ Ejemplo a insertar:
     "imagen_alimento": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoVpyEvllMB2Wrj4Yeuu1FBdruHNBndnH8Vw&s"
 }
 
+*Nota: para realizar este item el usuario debe estar autenticado.*
+
 * Para ordenar los alimentos, utilizamos 'GET', con los parámetros 'orderBy' (para especificar el campo de ordenamiento, como calorías, proteínas o ID_grupos) y 'orderDirection'(para definir el sentido del orden: 'ASC' para ascendente o 'DESC' para descendente).
 
 *Nota: 'ASC' es la forma predeterminada.*
 
-Ejemplo: 'GET' https://localhost/nutriAPP/API_REST/api/alimentos?orderBy=calorias
+Ejemplo: 'GET' API_REST/api/alimentos?orderBy=calorias
 
-'GET' https://localhost/nutriAPP/API_REST/api/alimentos?orderBy=calorias&orderDirection=DESC
+'GET' /nutriAPP/API_REST/api/alimentos?orderBy=calorias&orderDirection=DESC
 
 * Para filtrar los alimentos por un campo especifíco, utilizamos los parámetos 'filtro' (nombre del campo) y 'valor' (dato a buscar en el campo indicado).
 
-*Nota: 'valor' debe tener el formato "0.00" (decimal) y ser mayor que 0.*
+*Nota: 'valor' debe tener el formato "0.00" (decimal) y ser mayor o igual que 0.*
 
 Ejemplo: utilizamos el verbo 'GET'.
 
 'filtro' = proteinas, 'valor' = 6.64
 
-https://localhost/nutriAPP/API_REST/api/alimentos?filtro=proteinas&valor=6.64 Obtiene todos los alimentos cuyo campo "proteinas" tenga el valor "6.64".
+/nutriAPP/API_REST/api/alimentos?filtro=proteinas&valor=6.64 Obtiene todos los alimentos cuyo campo "proteinas" tenga el valor "6.64".
 
 * Para paginar los resultados, utilizamos 'pagina' (número de página, por defecto 1) y 'limite' (cantidad máxima de alimentos por página). 
 
@@ -100,12 +103,12 @@ Ejemplo: utilizamos el verbo 'GET'
 'pagina' = 1, 
 'limite' = 5
 
-https://localhost/nutriAPP/API_REST/api/alimentos?pagina=1&limite=5 Obtiene los primeros 5 alimentos disponibles.
+/nutriAPP/API_REST/api/alimentos?pagina=1&limite=5 Obtiene los primeros 5 alimentos disponibles.
 
 * Autenticación: 
 Para acceder a recursos protegdos, los usuarios deben autenticarse mediante un token:
 
-GET https://localhost/nutriAPP/API_REST/api/user/token 
+GET /nutriAPP/API_REST/api/user/token 
 Este endpoint proporciona un token JWT a los usuarios que envíen sus credenciales en el encabezado de la solicitud, codificadas en Base64.
 Si las credenciales son válidas, devuelve un token JWT para ser utilizado para autenticar futuras solicitudes. 
 
